@@ -1,103 +1,63 @@
-# Gatsby + Netlify CMS Starter
+# About
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b654c94e-08a6-4b79-b443-7837581b1d8d/deploy-status)](https://app.netlify.com/sites/gatsby-starter-netlify-cms-ci/deploys)
+This Jekyll Demo site is meant to showcase how a typical site can be created with Jekyll. It features a mix of developer friendly aspects such as galleries built from the file system, along with Client friendly features using Netlify CMS for basic editing that a client can login and update content via a web UI.
 
-**Note:** This starter uses [Gatsby v2](https://www.gatsbyjs.org/blog/2018-09-17-gatsby-v2/).
+**Live Demo** [https://jekyll-netlifycms.netlify.com/](https://jekyll-netlifycms.netlify.com/)
 
-This repo contains an example business website that is built with [Gatsby](https://www.gatsbyjs.org/), and [Netlify CMS](https://www.netlifycms.org): **[Demo Link](https://gatsby-netlify-cms.netlify.com/)**.
+# Features at a Glance
 
-It follows the [JAMstack architecture](https://jamstack.org) by using Git as a single source of truth, and [Netlify](https://www.netlify.com) for continuous deployment, and CDN distribution.
+- **[Gulp.js](https://gulpjs.com/)** build allows for SASS/SCSS and JS/Babel processing.
+- **live reloading** local development with Browser Sync
+- Homepage markup freedom that lets developers go wild!
+- Use partials/includes for re-useable content such as headers, footer and calls to action (\_include/call-to-action.html) that is easy to maintain.
+- Dynamic page [content from .CSV files](https://jekyll-netlifycms.netlify.com/directory/) that is easy for clients to manage using Excel.
+- Image gallery built from images in the file system. Developers simply add an image to a folder and the gallery is updated.
+- **[Netlify CMS integration](https://www.netlifycms.org/)** allows editing page content as well as creating News.
+- Contact form uses [Netlify Forms](https://www.netlify.com/docs/form-handling/) to receive submissions which can be [piped to other services](https://www.netlify.com/docs/form-handling/#receiving-submissions)
+- Uses [Jekyll](https://jekyllrb.com/docs/datafiles/) `\_data` to output content like variables across multiple pages, making content easy to maintain.
 
-## Features ##
+# Getting started
 
-- A simple landing page with blog functionality built with Netlify CMS
-- Editabe Pages: Landing, About, Product, Blog-Collection and Contact page with Netlify Form support
-- Create Blog posts from Netlify CMS
-- Tags: Separate page for posts under each tag
-- Basic directory organization
-- Uses Bulma for styling, but size is reduced by `purge-css-plugin`
-- Blazing fast loading times thanks to pre-rendered HTML and automatic chunk loading of JS files
-- Uses `gatbsy-image` with Netlify-CMS preview support
-- Separate components for everything
-- Netlify deploy configuration
-- Netlify function support, see `src/lambda` folder
-- Perfect score on Lighthouse for SEO, Accessibility and Performance (wip:PWA)
-- ..and more
+This project requires first that [Jekyll be installed](https://jekyllrb.com/docs/installation/) along with the [Node.js](https://nodejs.org/en/download/). If its your first time run `gem install jekyll bundler` to install both Jekyll and Bundler locally.
 
-## Prerequisites
+After cloning the project
 
-- Node (I recommend using v8.2.0 or higher)
-- [Gatsby CLI](https://www.gatsbyjs.org/docs/)
+- run `bundle install` to install gem dependencies
+- run `npm install` to install npm modules
+- run `gulp` to start live development
 
-## Getting Started (Recommended)
+  <!-- Markdown snippet -->
 
-Netlify CMS can run in any frontend web environment, but the quickest way to try it out is by running it on a pre-configured starter site with Netlify. The example here is the Kaldi coffee company template (adapted from [One Click Hugo CMS](https://github.com/netlify-templates/one-click-hugo-cms)). Use the button below to build and deploy your own copy of the repository:
+  [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/NickStees/jekyll-cms)
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/gatsby-starter-netlify-cms&amp;stack=cms"><img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"></a>
+## SCSS and JS
 
-After clicking that button, you’ll authenticate with GitHub and choose a repository name. Netlify will then automatically create a repository in your GitHub account with a copy of the files from the template. Next, it will build and deploy the new site on Netlify, bringing you to the site dashboard when the build is complete. Next, you’ll need to set up Netlify’s Identity service to authorize users to log in to the CMS.
+The theme and JS files are located in the `/assets/_scss` and `/assets/js` folder. Gulp will process these files and build the sites final CSS and JS files.
 
-### Access Locally
-```
-$ git clone https://github.com/[GITHUB_USERNAME]/[REPO_NAME].git
-$ cd [REPO_NAME]
-$ yarn
-$ npm run start
-```
-To test the CMS locally, you'll need run a production build of the site:
-```
-$ npm run build
-$ npm run serve
-```
+## Netlify CMS Integration
 
-### Media Libraries (installed, but optional)
+The Netlify CMS edits the YAML files in `_data/*` along with the `_posts` folder for the sites News. By allowing the Netlify CMS to edit mainly the `_data` files, you are free to use complex markup on the rest of the site pages (more than markdown provides), and to pull in Netlify CMS managed content you simply tell Jekyll to output {{ site.data.home.title }} which coresponds to the `_data/home.yml` to access the Netlify CMS managed YAMl data.
 
-Media Libraries have been included in this starter as a default. If you are not planning to use `Uploadcare` or `Cloudinary` in your project, you **can** remove them from module import and registration in `src/cms/cms.js`. Here is an example of the lines to comment or remove them your project.
-```javascript
-import CMS from 'netlify-cms-app'
-// import uploadcare from 'netlify-cms-media-library-uploadcare'
-// import cloudinary from 'netlify-cms-media-library-cloudinary'
+Each _.html page will need a corresponding _.yml file that the Netlify CMS will edit. So you can control exactly what the client can edit.
 
-import AboutPagePreview from './preview-templates/AboutPagePreview'
-import BlogPostPreview from './preview-templates/BlogPostPreview'
-import ProductPagePreview from './preview-templates/ProductPagePreview'
-import IndexPagePreview from './preview-templates/IndexPagePreview'
+You can have Netlify CMS save content as Markdown, and have Jekyll process it into html using the markdownify [Liquid filter](https://jekyllrb.com/docs/liquid/filters/) ex. {{ site.data.home.intro-body | markdownify }}
 
-// CMS.registerMediaLibrary(uploadcare);
-// CMS.registerMediaLibrary(cloudinary);
+This demo site also uses some 'Global' yaml files `_data/business.yml` and `_data/social_media.yml` that can be edited which are like site wide settings that multiple pages use such as a business address or phone number. So only one Global file needs updated, and the rest of the site is updated.
 
-CMS.registerPreviewTemplate('index', IndexPagePreview)
-CMS.registerPreviewTemplate('about', AboutPagePreview)
-CMS.registerPreviewTemplate('products', ProductPagePreview)
-CMS.registerPreviewTemplate('blog', BlogPostPreview)
+News can be created by the Netlify CMS similar [to a blog example](https://hackernoon.com/adding-a-cms-to-your-static-site-with-netlify-cms-4adadf49aac2), which creates markdown files in the `\_posts` directory.
 
-```
+## Directories Explained
 
-## Getting Started (Without Netlify)
-```
-$ gatsby new [SITE_DIRECTORY_NAME] https://github.com/netlify-templates/gatsby-starter-netlify-cms/
-$ cd [SITE_DIRECTORY_NAME]
-$ npm run build
-$ npm run serve
-```
+This is a quick overview of this projects directories, and how they are used.
 
-### Setting up the CMS
-Follow the [Netlify CMS Quick Start Guide](https://www.netlifycms.org/docs/quick-start/#authentication) to set up authentication, and hosting.
-
-## Debugging
-Windows users might encounter ```node-gyp``` errors when trying to npm install.
-To resolve, make sure that you have both Python 2.7 and the Visual C++ build environment installed.
-```
-npm config set python python2.7
-npm install --global --production windows-build-tools
-```
-
-[Full details here](https://www.npmjs.com/package/node-gyp 'NPM node-gyp page')
-
-## Purgecss
-This plugin uses [gatsby-plugin-purgecss](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss/) and [bulma](https://bulma.io/). The bulma builds are usually ~170K but reduced 90% by purgecss.
-
-# CONTRIBUTING
-
-Contributions are always welcome, no matter how large or small. Before contributing,
-please read the [code of conduct](CODE_OF_CONDUCT.md).
+- **\_data** Jekyll [Data Files](https://jekyllrb.com/docs/datafiles/) which is also what Netlify CMS will mainly edit to update site pages.
+- **\_includes** [Reuseable components/partials](https://jekyllrb.com/docs/includes/) that are used across multiple pages
+- **\_layouts** Default [Jekyll layouts](https://jekyllrb.com/docs/step-by-step/04-layouts/)
+- **\_posts** Defautl Jekyll [Posts/News](https://jekyllrb.com/docs/posts/) articles configued to be edited by Netlify CMS
+- **admin** [Netlify CMS configuration](https://www.netlifycms.org/docs/add-to-your-site/)
+- **api** An example of making a static JSON file an API endpoint
+- **assets** SCSS/JS files mainly related to the Theme, processed by Gulp.js
+- **docs** A folder of [static files](https://jekyllrb.com/docs/static-files/) used to build dynamic pages (Documents) based on the files in these folders, easy for a Developer to maintain.
+- **img** Static images as well as the Gallery Page is dynamically created from the contents of the `img/gallery` folder
+- **uploads** The location Netlify CMS editor [uploads files](https://www.netlifycms.org/docs/configuration-options/#media-library).
+- **\_\_\_.html** The site pages are mainly created from these .html files which pull data from the `_data` directory that can be maintained from the Netlify CMS

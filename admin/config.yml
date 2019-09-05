@@ -1,0 +1,101 @@
+backend:
+  name: git-gateway
+  branch: master # Branch to update (optional; defaults to master)
+# This line should *not* be indented
+media_folder: "uploads" # Media files will be stored in the repo under images/uploads
+collections:
+  - name: "news" # Used in routes, e.g. /admin/collections/blog
+    label: "News" # Used in the UI
+    folder: "_posts" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template i.e. YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Create Date", name: "createdate", widget: "string", required: false}
+      - {label: "Link", name: "link", widget: "string", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - label: "Global"
+    name: "global"
+    files:
+      - label: "PDF file"
+        name: "pdf"
+        file: "_data/pdf.yml"
+        fields:
+          - label: pdf
+            name: pdf
+            widget: list
+            fields:
+              - {label: Date, name: date, widget: string}
+              - {label: Summary, name: summary, widget: string}
+              - {label: Type, name: type, widget: string}
+              - {label: Pdf, name: pdf, widget: file}
+  - label: "Pages"
+    name: "home"
+    files:
+      - label: "Home Page"
+        name: "home"
+        file: "_data/home.yml"
+        fields:
+          - {label: Title, name: title, widget: string, hint: "The Large Text at the top"}
+          - {label: Subtitle, name: subtitle, widget: string}
+          - {label: news, name: news, widget: string}
+        #  - {label: Intro Title, name: intro-title, widget: string, hint: "The first chunk of content"}
+        #  - {label: Intro Subtitle, name: intro-subtitle, widget: string, hint: "The first chunk of content"}
+          - {label: Intro Body, name: intro-body, widget: markdown}
+         # - {label: Intro Image, name: intro-img, widget: image}
+         # - {label: Feature Title, name: feature-title, widget: string}
+         # - {label: Feature Subtitle, name: feature-subtitle, widget: string}
+         # - {label: Testimonial Title, name: testimonial-title, widget: string}
+         # - {label: Testimonial Subtitle, name: testimonial-subtitle, widget: string}
+         # - {label: Hotels, name: hotels, widget: number, hint: "This is the animated number that counts up"}
+         # - {label: Resturants, name: resturants, widget: number, hint: "This is the animated number that counts up"}
+         # - {label: Museums, name: museums, widget: number, hint: "This is the animated number that counts up"}
+         # - {label: Minutes, name: minutes, widget: number, hint: "This is the animated number that counts up"}
+         # - {label: Services Title, name: services-title, widget: string}
+         # - {label: Services Subtitle, name: services-subtitle, widget: string, hint: "Services can be found in the Global area"}
+      - label: "About Page"
+        name: "about"
+        file: "_data/about.yml"
+        fields:
+          - {label: Title, name: title, widget: string, hint: "The Large Text at the top"}
+          - {label: Subtitle, name: subtitle, widget: string}
+          - {label: Intro Body, name: intro-body, widget: markdown}
+      - label: "Team Page"
+        name: "team"
+        file: "_data/team.yml"
+        fields:
+          - {label: Title, name: title, widget: string, hint: "The Large Text at the top"}
+          - {label: Name, name: name1, widget: string}
+          - {label: Position, name: position1, widget: string}
+          - {label: Introduce, name: intro-body1, widget: markdown}
+          - {label: Name, name: name2, widget: string}
+          - {label: Introduce, name: intro-body2, widget: markdown}
+          - {label: Name, name: name3, widget: string}
+          - {label: Introduce, name: intro-body3, widget: markdown}
+          - {label: Name, name: name4, widget: string}
+          - {label: Introduce, name: intro-body4, widget: markdown}
+          - {label: Name, name: name5, widget: string}
+          - {label: Introduce, name: intro-body5, widget: markdown}
+          - {label: Name, name: name6, widget: string}
+          - {label: Position, name: position6, widget: string}
+          - {label: Introduce, name: intro-body6, widget: markdown}
+          - {label: Name, name: name7, widget: string}
+          - {label: Position, name: position7, widget: string}
+          - {label: Introduce, name: intro-body7, widget: markdown}
+          - {label: Name, name: name8, widget: string}
+          - {label: Position, name: position8, widget: string}
+          - {label: Introduce, name: intro-body8, widget: markdown}
+      - label: "BCX Data Page"
+        name: "bcx-data"
+        file: "_data/bcx-data.yml"
+        fields:
+          - {label: Title, name: title, widget: string, hint: "The Large Text at the top"}
+          - {label: Subtitle, name: subtitle, widget: string}
+          - {label: Intro Body, name: intro-body, widget: markdown}
+      - label: "Reports Page"
+        name: "reports"
+        file: "_data/reports.yml"
+        fields:
+          - {label: Title, name: title, widget: string, hint: "The Large Text at the top"}
+      

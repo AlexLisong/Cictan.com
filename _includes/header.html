@@ -1,0 +1,73 @@
+<!-- Header Start -->
+<header>
+  <div class="hero-nav">
+    <!-- MAIN MENU LOCATION -->
+    <!-- BEGIN MENU -->
+    <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium">
+      <div class="title-bar-left">
+        <a href="index.html"><img src="/img/logo_darkbkg.svg" alt="logo"></a>
+      </div>
+      <div class="title-bar-right data-toggle" data-toggle>
+        <button class="menu-icon" type="button"></button>
+        <div class="title-bar-title">Menu</div>
+      </div>
+    </div>
+
+    <div class="top-bar" id="main-menu">
+      <div class="logo hide-for-small-only">
+        <a href="/"><img src="/img/logo_lightbkg.svg" alt="Blockchain Holdings Ltd"></a>
+
+      </div>
+      <nav class="top-bar-right">
+        <ul class="vertical medium-horizontal menu" data-responsive-menu="accordion medium-dropdown">
+          <li><a href="/">Home</a></li>
+          <li>
+            {% if page.permalink contains '/about' %}
+            <a href="/about.html" class="active">About</a>
+            {% else %}
+            <a href="/about.html">About</a>
+            {% endif %}
+          </li>
+          <li>
+            {% if page.permalink contains '/team' %}
+            <a href="#" class="active">Corporate</a>
+            {% else %}
+            <a href="#">Corporate</a>
+            {% endif %}
+            <ul class="vertical menu">
+              <li><a href="/team.html#panel-directors">Board of Directors</a></li>
+              <li><a href="/team.html#panel-mgmt">Management Team</a></li>
+            </ul>
+          </li>
+          <li>
+            {% if page.permalink contains '/bcx-data' %}
+            <a href="#" class="active">Projects</a>
+            {% else %}
+            <a href="#">Projects</a>
+            {% endif %}
+            <ul class="vertical menu">
+              <li><a href="/about.html">Blockchain Holdings</a></li>
+              <li><a href="/bcx-data.html">BCX Data</a></li>
+            </ul>
+          </li>
+
+          <li>
+            {% if page.permalink contains '/news'  or  page.permalink contains '/reprots' %}
+            <a href="#" class="active">Investors</a>
+            {% else %}
+            <a href="#">Investors</a>
+            {% endif %}
+
+            <ul class="vertical menu">
+              <li><a href="/news.html">News Releases</a></li>
+              <!-- <li><a href="/stock-information.html">Stock Information</a></li>
+                        <li><a href="/financial-statements.html">Financial Statements</a></li>
+                        <li><a href="/capital-structure.html">Capital Structure</a></li> -->
+              <li><a href="/reports.html">Reports &amp; Presentations</a></li>
+            </ul>
+          </li>
+          <li class="contact"><a href="/contact.html" class="button success">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+</header><!-- header close -->
